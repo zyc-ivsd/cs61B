@@ -241,14 +241,18 @@ public class Model extends Observable {
                 }
                 else{
                     if (i<b.size()-1&&j<b.size()-1){
-                    if (b.tile(i,j+1)!=null){
-                        if(b.tile(i,j).value()==b.tile(i,j+1).value())
-                            return true;
-                    }
-                    else if (b.tile(i+1,j)!=null) {
-                        if(b.tile(i,j).value()==b.tile(i+1,j).value())
-                            return true;
-                    }
+                       if(b.tile(i,j+1)!=null&&b.tile(i+1,j)!=null){
+                           if(b.tile(i,j).value()==b.tile(i+1,j).value()||b.tile(i,j).value()==b.tile(i,j+1).value())
+                               return true;
+                       }
+                       else if (b.tile(i+1,j)!=null&&b.tile(i,j+1)==null) {
+                           if(b.tile(i,j).value()==b.tile(i+1,j).value())
+                               return true;
+                       }
+                       else if(b.tile(i,j+1)!=null&&b.tile(i+1,j)==null){
+                           if (b.tile(i,j).value()==b.tile(i,j+1).value())
+                               return true;
+                       }
                     }
                     else if (i==b.size()-1&&j<b.size()-1&&b.tile(i,j+1)!=null) {
                         if(b.tile(i,j).value()==b.tile(i,j+1).value())
@@ -258,7 +262,7 @@ public class Model extends Observable {
                         if(b.tile(i,j).value()==b.tile(i+1,j).value())
                             return true;
                     }
-                    else {
+                    else if(j==b.size()-1&&i==b.size()-1) {
                         continue;
                     }
                 }
